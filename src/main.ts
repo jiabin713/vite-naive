@@ -2,12 +2,15 @@ import { createApp } from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
-import i18n from './locales';
+import 'virtual:windi.css';
 
 const app = createApp(App);
 
 app.use(router);
 app.use(store);
-app.use(i18n);
+
+const meta = document.createElement('meta');
+meta.name = 'naive-ui-style';
+document.head.appendChild(meta);
 
 app.mount('#app');

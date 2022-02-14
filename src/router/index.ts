@@ -1,6 +1,8 @@
 import PageLayout from '@/layouts/PageLayout';
 import { createRouter, createWebHistory } from 'vue-router';
 
+import LoginRouter from './modules/login';
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -8,7 +10,7 @@ const router = createRouter({
     //   path: '/',
     //   redirect: 'login',
     // },
-    // Login,
+    // LoginRouter,
     {
       name: 'root',
       path: '/',
