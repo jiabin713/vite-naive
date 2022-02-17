@@ -23,10 +23,10 @@ func SystemRoutes(route fiber.Router) {
 func StaffRoutes(route fiber.Router) {
 	staffs := route.Group("staffs")
 	staffs.Get("/", controllers.GetStaffs)
-	// staffs.Post("/", controllers.CreateStaff)
-	// staffs.Put("/", controllers.UpdateStaff)
-	// staffs.Get("/:id", controllers.GetStaff)
-	// staffs.Delete("/:id", controllers.DeleteStaff)
+	staffs.Post("/", controllers.CreateStaff)
+	staffs.Put("/", controllers.UpdateStaff)
+	staffs.Get("/:id", controllers.GetStaff)
+	staffs.Delete("/:id", controllers.DeleteStaff)
 }
 
 // func DictionaryRoutes(route fiber.Router) {

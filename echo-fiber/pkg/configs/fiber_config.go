@@ -1,6 +1,7 @@
 package configs
 
 import (
+	"echo-fiber/pkg/exceptions"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -9,7 +10,7 @@ import (
 func FiberConfig() fiber.Config {
 
 	return fiber.Config{
-		// ErrorHandler:          exceptions.ExceptionHandler,
+		ErrorHandler:          exceptions.ExceptionHandler,
 		Prefork:               false,                           // 同一端口多进程
 		ServerHeader:          "",                              // 服务报头
 		StrictRouting:         false,                           // 严格路由(是否区分 /foo 和 /foo/
