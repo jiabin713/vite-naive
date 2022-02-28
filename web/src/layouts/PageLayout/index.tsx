@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { NLayout } from 'naive-ui';
 import { defineComponent } from 'vue';
 import GlobalFooter from '../components/GlobalFooter';

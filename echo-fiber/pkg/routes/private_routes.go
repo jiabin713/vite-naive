@@ -16,6 +16,7 @@ func PrivateRoutes(a *fiber.App) {
 func SystemRoutes(route fiber.Router) {
 	system := route.Group("/system")
 	StaffRoutes(system)
+	MenuRoutes(system)
 	// DictionaryRoutes(system)
 	// DictionaryItemRoutes(system)
 }
@@ -27,6 +28,15 @@ func StaffRoutes(route fiber.Router) {
 	staffs.Put("/", controllers.UpdateStaff)
 	staffs.Get("/:id", controllers.GetStaff)
 	staffs.Delete("/:id", controllers.DeleteStaff)
+}
+
+func MenuRoutes(route fiber.Router) {
+	staffs := route.Group("menus")
+	staffs.Get("/", controllers.GetMenus)
+	staffs.Post("/", controllers.CreateMenu)
+	staffs.Put("/", controllers.UpdateMenu)
+	staffs.Get("/:id", controllers.GetMenu)
+	staffs.Delete("/:id", controllers.DeleteMenu)
 }
 
 // func DictionaryRoutes(route fiber.Router) {

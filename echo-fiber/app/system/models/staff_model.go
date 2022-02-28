@@ -1,21 +1,17 @@
 package models
 
-import (
-	"github.com/google/uuid"
-)
-
 // entity
 type Staff struct {
-	ID        uuid.UUID `db:"id" json:"id" validate:"uuid"`
-	Username  string    `db:"username" json:"username" validate:"required,min=4,max=64,alphanum"`
-	Password  string    `db:"password" json:"-" validate:"required,min=6,max=64"`
-	Email     *string   `db:"email" json:"email,omitempty" validate:"required,email"`
-	Mobile    *string   `db:"mobile" json:"mobile,omitempty" validate:"required,min=11,max=11"`
-	Status    string    `db:"status" json:"status" validate:"required,min=4,max=64"`
-	Sort      int32     `db:"sort" json:"sort" validate:"number"`
-	Remark    *string   `db:"remark" json:"remark,omitempty"`
-	CreatedAt int64     `db:"created_at" json:"-"`
-	UpdatedAt int64     `db:"updated_at" json:"updated_at"`
+	ID        string  `db:"id" json:"id" validate:"number"`
+	Username  string  `db:"username" json:"username" validate:"required,min=4,max=64,alphanum"`
+	Password  string  `db:"password" json:"-" validate:"required,min=6,max=64"`
+	Email     *string `db:"email" json:"email,omitempty" validate:"required,email"`
+	Mobile    *string `db:"mobile" json:"mobile,omitempty" validate:"required,min=11,max=11"`
+	Status    string  `db:"status" json:"status" validate:"required,min=4,max=64"`
+	Sort      int32   `db:"sort" json:"sort" validate:"number"`
+	Remark    *string `db:"remark" json:"remark,omitempty"`
+	CreatedAt int64   `db:"created_at" json:"-"`
+	UpdatedAt int64   `db:"updated_at" json:"updated_at"`
 }
 
 // create dto
@@ -31,14 +27,14 @@ type CreateStaffRequest struct {
 
 // update dto
 type UpdateStaffRequest struct {
-	ID        uuid.UUID `db:"id" json:"id" validate:"required,uuid"`
-	Username  string    `db:"username" json:"username" validate:"required,min=4,max=64,alphanum"`
-	Email     *string   `db:"email" json:"email,omitempty" validate:"required,email"`
-	Mobile    *string   `db:"mobile" json:"mobile,omitempty" validate:"required,min=11,max=11"`
-	Status    string    `db:"status" json:"status" validate:"required,min=4,max=64"`
-	Sort      int32     `db:"sort" json:"sort" validate:"number"`
-	Remark    *string   `db:"remark" json:"remark,omitempty"`
-	UpdatedAt int64     `db:"updated_at" json:"updated_at"`
+	ID        string  `db:"id" json:"id" validate:"required,number"`
+	Username  string  `db:"username" json:"username" validate:"required,min=4,max=64,alphanum"`
+	Email     *string `db:"email" json:"email,omitempty" validate:"required,email"`
+	Mobile    *string `db:"mobile" json:"mobile,omitempty" validate:"required,min=11,max=11"`
+	Status    string  `db:"status" json:"status" validate:"required,min=4,max=64"`
+	Sort      int32   `db:"sort" json:"sort" validate:"number"`
+	Remark    *string `db:"remark" json:"remark,omitempty"`
+	UpdatedAt int64   `db:"updated_at" json:"updated_at"`
 }
 
 // query dto

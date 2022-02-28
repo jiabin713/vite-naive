@@ -5,8 +5,6 @@ import (
 	"echo-fiber/app/system/repositories"
 	"echo-fiber/pkg/utils"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 func GetStaffs(where *models.WhereStaffParams) ([]*models.Staff, uint64, error) {
@@ -18,7 +16,7 @@ func GetStaffs(where *models.WhereStaffParams) ([]*models.Staff, uint64, error) 
 	return staffs, count, err
 }
 
-func GetStaff(id uuid.UUID) (*models.Staff, error) {
+func GetStaff(id string) (*models.Staff, error) {
 	staff, err := repositories.GetStaff(id)
 	if err != nil {
 		return nil, err
@@ -28,7 +26,7 @@ func GetStaff(id uuid.UUID) (*models.Staff, error) {
 
 func CreateStaff(createReq *models.CreateStaffRequest) error {
 	staff := &models.Staff{
-		ID:        uuid.New(),
+		ID:        utils.GenerateID(),
 		Username:  createReq.Username,
 		Password:  utils.GeneratePassword(createReq.Password),
 		Email:     createReq.Email,
@@ -39,7 +37,7 @@ func CreateStaff(createReq *models.CreateStaffRequest) error {
 		CreatedAt: time.Now().Unix(),
 		UpdatedAt: time.Now().Unix(),
 	}
-	checkFields(staff)
+	checkStaffFields(staff)
 	if err := repositories.CreateStaff(staff); err != nil {
 		return err
 	}
@@ -58,13 +56,13 @@ func UpdateStaff(updateReq *models.UpdateStaffRequest) error {
 	return nil
 }
 
-func DeleteStaff(id uuid.UUID) error {
+func DeleteStaff(id string) error {
 	if err := repositories.DeleteStaff(id); err != nil {
 		return err
 	}
 	return nil
 }
 
-func checkFields(staff *models.Staff) {
+func checkStaffFields(staff *models.Staff) {
 	repositories.CheckStaffFields(staff)
 }

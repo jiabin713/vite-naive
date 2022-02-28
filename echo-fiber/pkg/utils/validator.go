@@ -13,10 +13,11 @@ func NewValidator() *validator.Validate {
 	// Custom validation for uuid.UUID fields.
 	_ = validate.RegisterValidation("uuid", func(fl validator.FieldLevel) bool {
 		field := fl.Field().String()
+
 		if _, err := uuid.Parse(field); err != nil {
-			return true
+			return false
 		}
-		return false
+		return true
 	})
 
 	return validate

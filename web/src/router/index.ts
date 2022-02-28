@@ -6,11 +6,11 @@ import LoginRouter from './modules/login';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    // {
-    //   path: '/',
-    //   redirect: 'login',
-    // },
-    // LoginRouter,
+    {
+      path: '/',
+      redirect: 'login',
+    },
+    LoginRouter,
     {
       name: 'root',
       path: '/',

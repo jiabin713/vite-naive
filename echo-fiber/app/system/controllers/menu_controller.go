@@ -9,8 +9,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetStaffs(ctx *fiber.Ctx) error {
-	where := &models.WhereStaffParams{
+func GetMenus(ctx *fiber.Ctx) error {
+	where := &models.WhereMenuParams{
 		PageSize: 10,
 		Current:  1,
 	}
@@ -22,26 +22,26 @@ func GetStaffs(ctx *fiber.Ctx) error {
 	if err := utils.NewValidator().Struct(where); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
-	staffs, count, err := services.GetStaffs(where)
+	menus, count, err := services.GetMenus(where)
 	if err != nil {
 		return fiber.NewError(fiber.StatusNotFound, err.Error())
 	}
-	return ctx.JSON(response.Page(staffs, where.Current, where.PageSize, count))
+	return ctx.JSON(response.Page(menus, where.Current, where.PageSize, count))
 }
 
-func GetStaff(ctx *fiber.Ctx) error {
+func GetMenu(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
 
-	staff, err := services.GetStaff(id)
+	menu, err := services.GetMenu(id)
 	if err != nil {
 		return fiber.NewError(fiber.StatusNotFound, err.Error())
 	}
-	return ctx.JSON(response.OK(staff))
+	return ctx.JSON(response.OK(menu))
 }
 
-func CreateStaff(ctx *fiber.Ctx) error {
+func CreateMenu(ctx *fiber.Ctx) error {
 	// 新建请求struct 并赋默认值
-	createReq := &models.CreateStaffRequest{
+	createReq := &models.CreateMenuRequest{
 		Status: "Default",
 		Sort:   1000,
 	}
@@ -54,31 +54,30 @@ func CreateStaff(ctx *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
 	// 新建实体
-	if err := services.CreateStaff(createReq); err != nil {
+	if err := services.CreateMenu(createReq); err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 	// 返回结果
 	return ctx.JSON(response.OK(true))
 }
 
-func UpdateStaff(ctx *fiber.Ctx) error {
-	updateReq := &models.UpdateStaffRequest{}
+func UpdateMenu(ctx *fiber.Ctx) error {
+	updateReq := &models.UpdateMenuRequest{}
 	if err := ctx.BodyParser(updateReq); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
 	if err := utils.NewValidator().Struct(updateReq); err != nil {
 		return fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
-	if err := services.UpdateStaff(updateReq); err != nil {
+	if err := services.UpdateMenu(updateReq); err != nil {
 		return fiber.NewError(fiber.StatusInternalServerError, err.Error())
 	}
 	return ctx.JSON(response.OK(true))
 }
 
-func DeleteStaff(ctx *fiber.Ctx) error {
+func DeleteMenu(ctx *fiber.Ctx) error {
 	id := ctx.Params("id")
-
-	if err := services.DeleteStaff(id); err != nil {
+	if err := services.DeleteMenu(id); err != nil {
 		return fiber.NewError(fiber.StatusNotFound, err.Error())
 	}
 	return ctx.JSON(response.OK(true))

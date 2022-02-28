@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/Masterminds/squirrel"
-	"github.com/google/uuid"
 )
 
 const staffs_table = "system_staffs"
@@ -55,7 +54,7 @@ func GetStaffs(where *models.WhereStaffParams) ([]*models.Staff, error) {
 	return staffs, err
 }
 
-func GetStaff(id uuid.UUID) (*models.Staff, error) {
+func GetStaff(id string) (*models.Staff, error) {
 	sql := squirrel.Select("id", "username", "email", "mobile", "status", "sort", "remark", "updated_at").From(staffs_table)
 	stmt, args, _ := sql.Where(squirrel.Eq{"id": id}).PlaceholderFormat(squirrel.Question).ToSql()
 	var staff models.Staff
@@ -94,7 +93,7 @@ func UpdateStaff(updateReq *models.UpdateStaffRequest) error {
 	return err
 }
 
-func DeleteStaff(id uuid.UUID) error {
+func DeleteStaff(id string) error {
 	stmt, args, _ := squirrel.Delete(staffs_table).Where(squirrel.Eq{"id": id}).PlaceholderFormat(squirrel.Question).ToSql()
 	_, err := global.DB.Exec(stmt, args...)
 	return err
